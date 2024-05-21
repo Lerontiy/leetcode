@@ -3,7 +3,8 @@ from icecream import ic
 
 class Solution(object):
     def __init__(self):
-        self.nums = [str(i) for i in range(0, 10)]
+        #self.nums = [str(i) for i in range(0, 10)]
+        self.nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     def myAtoi(self, s):
         """
@@ -15,12 +16,10 @@ class Solution(object):
         for i in s:
             ic(i, ret_str)
             if len(ret_str) == 0:
-                if i not in self.nums + [" ", "-", "+"]:
+                if i not in self.nums and i not in [" ", "-", "+"]:
                     return 0
                 elif i == " ":
                     continue
-                elif i in ["0"] and ("-" in s or "+" in s):
-                    ret_str += i
                 else:
                     ret_str += i
             else:
@@ -31,13 +30,13 @@ class Solution(object):
                         ret_str += i
                     else:
                         break
-                elif i in self.nums + ["0"]:
+                elif i in self.nums:
                     ret_str += i
                 else:
                     break
 
         try:
-            ret_str = int(float(ret_str))
+            ret_str = int(ret_str)
         except:  # noqa: E722
             ret_str = 0
 
