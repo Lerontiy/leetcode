@@ -54,3 +54,16 @@ def test9():
     text = "  -0012a42"
     result = solution_obj.myAtoi(text)
     assert result == -12
+
+def test10():
+    text = "0-1"
+    result = solution_obj.myAtoi(text)
+    assert result == 0
+
+def test11():
+    text = "-01324000"
+    result = solution_obj.myAtoi(text)
+    assert result == -1324000
+
+
+    

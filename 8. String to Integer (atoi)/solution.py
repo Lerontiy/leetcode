@@ -3,9 +3,9 @@ from icecream import ic
 
 class Solution(object):
     def __init__(self):
-        self.nums = [str(i) for i in range(1, 10)]
+        self.nums = [str(i) for i in range(0, 10)]
 
-    def myAtoi(self, s: str):
+    def myAtoi(self, s):
         """
         :type s: str
         :rtype: int
@@ -13,26 +13,28 @@ class Solution(object):
 
         ret_str = ""
         for i in s:
-            ic(i)
+            ic(i, ret_str)
             if len(ret_str) == 0:
-                if i not in self.nums + [" ", "-", "+", "0"]:
+                if i not in self.nums + [" ", "-", "+"]:
                     return 0
-                elif i in [" ", "0"]:
+                elif i == " ":
                     continue
+                elif i in ["0"] and ("-" in s or "+" in s):
+                    ret_str += i
                 else:
                     ret_str += i
             else:
                 if "+" in ret_str or "-" in ret_str:
-                    if i in ["0"] + self.nums:
-                        if "+" in ret_str:
-                            ret_str = ret_str.replace("+", "")
-                            ret_str += i
-                        else:
-                            ret_str += i
+                    if len(ret_str) == 1 and i == "0":
+                        continue
+                    if i in self.nums:
+                        ret_str += i
                     else:
-                        return 0
-                elif (i == "." and "." not in ret_str) or (i in self.nums + ["0"]):
+                        break
+                elif i in self.nums + ["0"]:
                     ret_str += i
+                else:
+                    break
 
         try:
             ret_str = int(float(ret_str))
